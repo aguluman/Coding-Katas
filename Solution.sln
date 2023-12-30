@@ -1,0 +1,30 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ToyCar", "ToyCar\ToyCar.csproj", "{241C017B-769D-449A-92CF-CEE6CD65F6A2}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "FSharp Solution", "FSharp Solution", "{C1710DFF-7A87-4527-80F1-A75A120B8732}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "CSharp Solution", "CSharp Solution", "{8CA7FDF8-AB3D-4E52-BC74-A599018D17BA}"
+EndProject
+Project("{F2A71F9B-5D33-465A-A702-920D77279786}") = "CarToy", "CarToy\CarToy.fsproj", "{BE45219F-582A-4FCC-BF96-B4A58CF2D530}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{241C017B-769D-449A-92CF-CEE6CD65F6A2}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{241C017B-769D-449A-92CF-CEE6CD65F6A2}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{241C017B-769D-449A-92CF-CEE6CD65F6A2}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{241C017B-769D-449A-92CF-CEE6CD65F6A2}.Release|Any CPU.Build.0 = Release|Any CPU
+		{BE45219F-582A-4FCC-BF96-B4A58CF2D530}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{BE45219F-582A-4FCC-BF96-B4A58CF2D530}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{BE45219F-582A-4FCC-BF96-B4A58CF2D530}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{BE45219F-582A-4FCC-BF96-B4A58CF2D530}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(NestedProjects) = preSolution
+		{241C017B-769D-449A-92CF-CEE6CD65F6A2} = {8CA7FDF8-AB3D-4E52-BC74-A599018D17BA}
+		{BE45219F-582A-4FCC-BF96-B4A58CF2D530} = {C1710DFF-7A87-4527-80F1-A75A120B8732}
+	EndGlobalSection
+EndGlobal
