@@ -1,72 +1,51 @@
 ﻿open System
 
-let longestCommonSubSequence (str1: string) (str2: string) : string =
-    let array1 = str1.ToCharArray()
-    let array2 = str2.ToCharArray()
+let readInputFields (fieldNumMsg:string) :string =
+    printfn $"Enter the number of words for the {fieldNumMsg} column"
+    let columnLength = Console.ReadLine() |> int
+    printfn $"Enter the words for the {fieldNumMsg} column"
+    let text = [ for _ in 1..columnLength -> Console.ReadLine() ] |> String.concat " "
+    text
 
-    let m = array1.Length
-    let n = array2.Length
+let removeConsecutiveDuplicates (input: string): string =
+        Seq.pairwise input
+        |> Seq.fold (fun acc (a, b) -> if a <> b then acc + string(b) else acc) (string(input.[0]))
 
+let longestCommonSubSequence (str1: string) (str2: string) :string =
+    let m, n = str1.Length, str2.Length
     let L = Array2D.create (m + 1) (n + 1) 0
 
     for i in 0..m do
         for j in 0..n do
-            if i = 0 || j = 0 then
-                L[i,j] <- 0
-            elif array1[i - 1] = array2[j - 1] then
-                L[i,j] <- L[i - 1, j - 1] + 1
-            else
-                L[i, j] <- max L[i - 1, j] L[i, j - 1]
+            L[i, j] <-
+                match i, j with
+                | 0, _
+                | _, 0 -> 0
+                | _ when str1[i - 1] = str2[j - 1] -> L[i - 1, j - 1] + 1
+                | _ -> max L[i - 1, j] L[i, j - 1]
 
-    let mutable index = L[m, n]
+    let rec constructLCS i j lcs =
+        match i, j with
+        | 0, _ | _, 0 -> new string (Array.ofList lcs) //If we've reached the start of either sequence
+        | _ when str1.[i - 1] = str2.[j - 1] -> // If the characters match
+            constructLCS (i - 1) (j - 1) (str1.[i - 1] :: lcs) // Add the character to the LCS and move diagonally
+        | _ when L.[i - 1, j] >= L.[i, j - 1] -> constructLCS (i - 1) j lcs // If the character from str1 doesn't match, move upwards
+        | _ -> constructLCS i (j - 1) lcs // If the character from str2 doesn't match, move to the left
 
-    let lcs = Array.create index ' '
-
-    let mutable i = m
-    let mutable j = n
-
-    while i > 0 && j > 0 do
-        if array1[i - 1] = array2[j - 1] then
-            lcs[index - 1] <- array1[i - 1]
-            i <- i - 1
-            j <- j - 1
-            index <- index - 1
-        elif L[i - 1, j] >= L[i, j - 1] then
-            i <- i - 1
-        else
-            j <- j - 1
-            lcs[index - 1] <- array2[j]
-
-    new string(lcs)
+    constructLCS m n []
 
 let decodeDirective (text1: string) (text2: string) : string =
-    let directive = longestCommonSubSequence text1 text2
-    if directive.Length > 0 then directive
-    else "-"
+    match longestCommonSubSequence text1 text2 with
+    | "" -> "-"
+    | lcs -> lcs
 
-//Reading input and calling Function
 [<EntryPoint>]
 let main _ =
-    Console.WriteLine("Enter the number of words in first text:")
-    let n = Int32.Parse(Console.ReadLine())
-
-    printfn "Enter the words for the first text:"
-    let text1 = [ for _ in 1..n -> Console.ReadLine() ] |> String.concat " "
-
-    Console.WriteLine("Enter the number of words in second text:")
-    let m = Int32.Parse(Console.ReadLine())
-
-    printfn "Enter the words for the second text:"
-    let text2 = [ for _ in 1..m -> Console.ReadLine() ] |> String.concat " "
-
-
-    let removeConsecutiveDuplicates (input: string): string =
-        Seq.pairwise input
-        |> Seq.fold (fun acc (a, b) -> if a <> b then acc + string(b) else acc) (string(input.[0]))
+    let text1 = readInputFields "first"
+    let text2 = readInputFields "second"
 
     let directive = decodeDirective text1 text2
     let directiveNoDuplicates = removeConsecutiveDuplicates directive
 
     Console.WriteLine($"Decoded Directive is : {directiveNoDuplicates}")
-
-    0 // return an integer exit code
+    0
