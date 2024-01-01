@@ -8,6 +8,8 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "CSharp Solution", "CSharp S
 EndProject
 Project("{F2A71F9B-5D33-465A-A702-920D77279786}") = "CarToy", "CarToy\CarToy.fsproj", "{BE45219F-582A-4FCC-BF96-B4A58CF2D530}"
 EndProject
+Project("{F2A71F9B-5D33-465A-A702-920D77279786}") = "Secret Directive", "Secret Directive\Secret Directive.fsproj", "{51E8C803-F490-4C34-AC84-4CD54C8DE467}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -22,9 +24,14 @@ Global
 		{BE45219F-582A-4FCC-BF96-B4A58CF2D530}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{BE45219F-582A-4FCC-BF96-B4A58CF2D530}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{BE45219F-582A-4FCC-BF96-B4A58CF2D530}.Release|Any CPU.Build.0 = Release|Any CPU
+		{51E8C803-F490-4C34-AC84-4CD54C8DE467}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{51E8C803-F490-4C34-AC84-4CD54C8DE467}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{51E8C803-F490-4C34-AC84-4CD54C8DE467}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{51E8C803-F490-4C34-AC84-4CD54C8DE467}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(NestedProjects) = preSolution
 		{241C017B-769D-449A-92CF-CEE6CD65F6A2} = {8CA7FDF8-AB3D-4E52-BC74-A599018D17BA}
 		{BE45219F-582A-4FCC-BF96-B4A58CF2D530} = {C1710DFF-7A87-4527-80F1-A75A120B8732}
+		{51E8C803-F490-4C34-AC84-4CD54C8DE467} = {C1710DFF-7A87-4527-80F1-A75A120B8732}
 	EndGlobalSection
 EndGlobal
