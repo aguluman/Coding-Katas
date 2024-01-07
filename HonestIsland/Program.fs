@@ -1,25 +1,32 @@
 ﻿open System
 
 let getAllPossibleNumbersOfLiars (repliesUnsorted: int list) : int list =
+    // Sort the replies
     let replies = List.sort repliesUnsorted
 
-    let possibleNumberOfLiars =
-        replies
-        |> List.mapi (fun i r -> (i, r))
-        |> List.fold
-            (fun acc (i, r) ->
-                if i <= r && (i = 0 || r <> List.item (i - 1) replies) then
-                    Set.add i acc
-                else
-                    acc)
-            Set.empty
+    // Define a function to test whether a reply might indicate the count of liars
+    let isPossibleLiarCount i r =
+        if i <= r && (i = 0 || r <> List.item (i - 1) replies) then
+            Some i
+        else
+            None
 
-    if List.last replies < List.length repliesUnsorted then
-        Set.add (List.length repliesUnsorted) possibleNumberOfLiars
+    // Map the replies to possible liar counts (or None where not possible)
+    let possibleCounts = List.mapi isPossibleLiarCount replies
+
+    // Extract the counts (ignoring the Nones)
+    let possibleCountsValues = List.choose id possibleCounts
+
+    // Convert counts to a set
+    let possibleNumberOfLiars = Set.ofList possibleCountsValues
+
+    // When all residents can be liars.
+    let totalResidents = List.length repliesUnsorted
+
+    if replies |> List.last < totalResidents then
+        Set.add totalResidents possibleNumberOfLiars |> Set.toList |> List.sort
     else
-        possibleNumberOfLiars
-    |> Set.toList
-    |> List.sort
+        possibleNumberOfLiars |> Set.toList |> List.sort
 
 [<EntryPoint>]
 let main _ =
